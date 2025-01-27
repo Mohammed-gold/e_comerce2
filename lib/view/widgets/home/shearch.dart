@@ -6,11 +6,15 @@ class shearch extends StatelessWidget {
   final String title;
   final void Function()? search;
   final void Function()? onnotifcation;
+  final TextEditingController controller;
+  final void Function(String)? onChanged;
   const shearch({
     super.key,
     required this.title,
     this.search,
     this.onnotifcation,
+    required this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -20,6 +24,8 @@ class shearch extends StatelessWidget {
         Expanded(
             flex: 4,
             child: TextFormField(
+              controller: controller,
+              onChanged: onChanged,
               decoration: InputDecoration(
                 hintText: title,
                 prefixIcon: IconButton(

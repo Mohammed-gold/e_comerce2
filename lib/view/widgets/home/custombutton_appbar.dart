@@ -19,19 +19,24 @@ class custombutton_appbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      minWidth: 12,
+      padding: EdgeInsets.zero,
+      minWidth: 2,
       onPressed: onPressed,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
+            size: 20,
             icon,
-            color: active == true ? Appcolor.primaryColor : Colors.grey,
+            color: active == true
+                ? Appcolor.primaryColor
+                : const Color.fromARGB(200, 41, 40, 40),
           ),
           Text(
             text,
             style: TextStyle(
-                color: active == true ? Appcolor.primaryColor : Colors.grey),
+                fontSize: 12,
+                color: active == true ? Appcolor.primaryColor : Colors.black),
           )
         ],
       ),

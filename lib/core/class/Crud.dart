@@ -15,24 +15,26 @@ class Crud {
   };
   Future<Either<StatusReqests, Map>> postdata(String url, Map data) async {
     try {
-      if (await checkinternet()) {
-        var response = await http.post(
-          Uri.parse(url),
-          body: data,
-        );
+      // if (await checkinternet()) {
+      var response = await http.post(
+        Uri.parse(url),
+        body: data,
+      );
 
-        print("==================${response.statusCode}");
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          print("==============================${response.body}");
-          var responsebody = jsonDecode(response.body);
-          return right(responsebody);
-        } else {
-          // print("${response.statusCode} 000000000000000000000000k");
-          return left(StatusReqests.serverfailure);
-        }
+      print("==================${response.statusCode}");
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 500) {
+        // print("==============================${response.body}");
+        var responsebody = jsonDecode(response.body);
+        return right(responsebody);
       } else {
-        return left(StatusReqests.offlinefailure);
+        // print("${response.statusCode} 000000000000000000000000k");
+        return left(StatusReqests.serverfailure);
       }
+      // } else {
+      // return left(StatusReqests.offlinefailure);
+      // }
     } catch (e) {
       print(e);
       return left(StatusReqests.serverfailure);

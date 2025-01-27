@@ -2,6 +2,8 @@
 
 import 'package:e_commerce/view/screen/favorite.dart';
 import 'package:e_commerce/view/screen/homepage.dart';
+import 'package:e_commerce/view/screen/profile.dart';
+import 'package:e_commerce/view/screen/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,17 +15,9 @@ abstract class Homescreencont extends GetxController {
 class Homescreencontim extends Homescreencont {
   List<Widget> list_pages = [
     const Homepage(),
-    Container(
-      child: const Center(
-        child: Text("Setting"),
-      ),
-    ),
-    Container(
-      child: const Center(
-        child: Text("profile"),
-      ),
-    ),
-    const Favorite()
+    const Profile(),
+    const Favorite(),
+    const Setting()
   ];
   List icons = [
     Icons.home,

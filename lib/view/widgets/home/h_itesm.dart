@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/controller/homepage/homepagecont.dart';
 import 'package:e_commerce/controller/itemscont.dart';
 import 'package:e_commerce/core/Translation/LocalLang.dart';
+import 'package:e_commerce/core/constant/root_c.dart';
 import 'package:e_commerce/core/functions/transleatedatabase.dart';
 import 'package:e_commerce/data/model/appscreenmodel/itemsmodel.dart';
 import 'package:e_commerce/linkurl.dart';
@@ -39,19 +40,26 @@ class Itemmo extends GetView<Itemscontim> {
   Widget build(BuildContext context) {
     LocalLang controllear = Get.find();
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(App_root.items_prodect, arguments: {
+          "itemomdel": itemsModel,
+        });
+      },
       child: Stack(
         children: [
-          Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: CachedNetworkImage(
-                imageUrl: "${Appurl.items}${itemsModel.itemsImage}",
-                width: 160,
-                height: 140,
-                fit: BoxFit.contain,
-              )),
+          Hero(
+            tag: "${itemsModel.itemsId}",
+            child: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: CachedNetworkImage(
+                  imageUrl: "${Appurl.items}${itemsModel.itemsImage}",
+                  width: 160,
+                  height: 140,
+                  fit: BoxFit.contain,
+                )),
+          ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 170,

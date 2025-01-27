@@ -11,7 +11,7 @@ class Myservicese extends GetxService {
     return this;
   }
 
-  // initilServices() async {
-  //   Get.putAsync(() => Myservicese().myservice());
-  // }
+  initilServices() async {
+    Get.putAsync(() => Myservicese().myservice());
+  }
 }

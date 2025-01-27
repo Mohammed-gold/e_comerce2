@@ -2,7 +2,7 @@
 
 class App_root {
   static String onbording = "/";
-  static String test = "/Test";
+  // static String map = "/";
   // Auth
   static String login = "/Login";
   static String sigin = "/Sign";
@@ -16,4 +16,12 @@ class App_root {
   static String items_prodect = "/itemsProdect";
   //favorite
   static String Favoritep = "/Favorite";
+  //Cart
+  static String Cart = "/Cart";
+  //Address
+  static String Addressviwe = "/Addressview";
+  static String addressAdd = "/addressAdd";
+  static String addressDitels = "/addressDitels";
+  //setting
+  static String Setting = "/Setting";
 }

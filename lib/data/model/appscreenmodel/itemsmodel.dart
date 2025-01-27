@@ -18,12 +18,14 @@ class itemsmodel {
   String? catNameAr;
   String? catImage;
   String? catDatetime;
+  int? items_pr_discount;
   int? favorite;
   // var itemsCat;
   itemsmodel(
       {this.itemsId,
       this.itemsName,
       this.itemsNameAr,
+      this.items_pr_discount,
       this.itemsDescreption,
       this.itemsDescreptionAr,
       this.itemsImage,
@@ -49,6 +51,7 @@ class itemsmodel {
     itemsImage = json['items_image'];
     itemsCount = json['items_count'];
     itemsPrice = json['items_price'];
+    items_pr_discount = json['items_P_d'];
     itemsDiscount = json['items_discount'];
     itemsDatetime = json['items_datetime'];
     itemsActive = json['items_active'];
@@ -71,6 +74,7 @@ class itemsmodel {
     data['items_image'] = this.itemsImage;
     data['items_count'] = this.itemsCount;
     data['items_price'] = this.itemsPrice;
+    data['items_P_d'] = this.items_pr_discount;
     data['items_discount'] = this.itemsDiscount;
     data['items_datetime'] = this.itemsDatetime;
     data['items_active'] = this.itemsActive;

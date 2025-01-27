@@ -30,8 +30,7 @@ class prodectditelImg extends StatelessWidget {
           ),
         ),
         Hero(
-          key: ValueKey(index),
-          tag: index,
+          tag: "${itemsm.itemsId}",
           child: Center(
             child: Container(
                 alignment: Alignment.center,

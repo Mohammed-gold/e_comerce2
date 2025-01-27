@@ -9,6 +9,7 @@ import 'package:e_commerce/data/model/appscreenmodel/catogires.dart';
 import 'package:e_commerce/view/screen/items.dart';
 import 'package:e_commerce/view/widgets/home/h_itesm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class catogries extends StatelessWidget {
@@ -44,7 +45,7 @@ class Catogresmod extends GetView<Homepagecontim> {
     return Column(
       children: [
         Container(
-          height: 70,
+          height: 60,
           width: 70,
           margin: const EdgeInsets.only(left: 5),
           decoration: BoxDecoration(
@@ -63,8 +64,12 @@ class Catogresmod extends GetView<Homepagecontim> {
                     ),
                   ));
             },
-            icon: Icon(Icons.abc),
-            iconSize: 40,
+            icon: SvgPicture.asset(
+              fit: BoxFit.fitHeight,
+              "assets/images/svg/${catogriesModel.catImage}",
+              height: 40,
+            ),
+            iconSize: 80,
             color: Appcolor.secondColor,
           ),
         ),

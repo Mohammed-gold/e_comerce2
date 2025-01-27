@@ -10,11 +10,10 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   Myservicese myservicese = Get.put(Myservicese());
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.dumpErrorToConsole(details);
-  };
+
   WidgetsFlutterBinding.ensureInitialized();
   await myservicese.myservice();
+  myservicese.initilServices();
   runApp(const MyApp());
 }
 

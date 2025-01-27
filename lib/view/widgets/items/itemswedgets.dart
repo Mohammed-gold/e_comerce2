@@ -39,91 +39,137 @@ class itemswideget extends StatelessWidget {
 
     return Handlingdataviwe(
       statusReqests: controller.statusReqests,
-      widget: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Hero(
-              tag: index,
-              child: CachedNetworkImage(
-                imageUrl: "${Appurl.items}${itemsmode.itemsImage}",
-                width: 140,
-                height: 110,
-                fit: BoxFit.contain,
-              ),
-            ),
-            const SizedBox(
-              height: 11,
-            ),
-            Text(
-              translatedatabase(
-                itemsmode.itemsNameAr!,
-                itemsmode.itemsName,
-              ),
-              style: const TextStyle(
-                  fontSize: 17,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      widget: Stack(
+        children: [
+          Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Hero(
+                  tag: "${itemsmode.itemsId}",
+                  child: CachedNetworkImage(
+                    imageUrl: "${Appurl.items}${itemsmode.itemsImage}",
+                    width: 140,
+                    height: 110,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
                 Text(
-                  "Rate",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Appcolor.primaryColor),
+                  translatedatabase(
+                    itemsmode.itemsNameAr!,
+                    itemsmode.itemsName,
+                  ),
+                  style: const TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Rate",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Appcolor.primaryColor),
+                    ),
+                    Row(
+                      spacing: 3,
+                      children: [
+                        Text("5.1"),
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey,
+                          size: 17,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 Row(
-                  spacing: 3,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("5.1"),
-                    Icon(
-                      Icons.star,
-                      color: Colors.grey,
-                      size: 17,
-                    ),
+                    itemsmode.itemsDiscount! > 0
+                        ? Row(
+                            spacing: 5,
+                            children: [
+                              Center(
+                                child: Text(
+                                  "${itemsmode.itemsPrice} \$",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Appcolor.grey),
+                                ),
+                              ),
+                              Text(
+                                "${itemsmode.items_pr_discount} \$",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Appcolor.primaryColor),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            "${itemsmode.itemsPrice} \$",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Appcolor.primaryColor),
+                          ),
+                    GetBuilder<Favoritec>(builder: (controller) {
+                      return IconButton(
+                          onPressed: () {
+                            if (controller.isfavorite[itemsmode.itemsId] == 1) {
+                              controller.setfavorite(itemsmode.itemsId, 0);
+                              controller.deletfav(itemsmode.itemsId);
+                            } else if (controller
+                                    .isfavorite[itemsmode.itemsId] ==
+                                0) {
+                              controller.setfavorite(itemsmode.itemsId, 1);
+                              controller.addfav(itemsmode.itemsId);
+                            }
+                          },
+                          icon: Icon(
+                            controller.isfavorite[itemsmode.itemsId] == 1
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            color: Appcolor.primaryColor,
+                          ));
+                    })
                   ],
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  "${itemsmode.itemsPrice} \$",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Appcolor.primaryColor),
-                ),
-                GetBuilder<Favoritec>(builder: (controller) {
-                  return IconButton(
-                      onPressed: () {
-                        if (controller.isfavorite[itemsmode.itemsId] == 1) {
-                          controller.setfavorite(itemsmode.itemsId, 0);
-                          controller.deletfav(itemsmode.itemsId);
-                        } else if (controller.isfavorite[itemsmode.itemsId] ==
-                            0) {
-                          controller.setfavorite(itemsmode.itemsId, 1);
-                          controller.addfav(itemsmode.itemsId);
-                        }
-                      },
-                      icon: Icon(
-                        controller.isfavorite[itemsmode.itemsId] == 1
-                            ? Icons.favorite
-                            : Icons.favorite_outline,
-                        color: Appcolor.primaryColor,
-                      ));
-                })
-              ],
-            ),
-          ],
-        ),
+          ),
+          if (itemsmode.itemsDiscount! > 0)
+            Container(
+              margin: EdgeInsets.only(left: 15),
+              padding: EdgeInsets.only(top: 7),
+              height: 45,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(206, 244, 67, 54),
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(10))),
+              child: Text(
+                "% ${itemsmode.itemsDiscount} ",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            )
+        ],
       ),
     );
   }
