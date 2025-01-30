@@ -22,8 +22,17 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(cartcontroller());
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My Cart"),
+        centerTitle: true,
+      ),
       bottomNavigationBar: GetBuilder<cartcontroller>(builder: (controller) {
         return cart_bottomAppbar(
+          cobon_onPress: () {
+            controller.checkCobon();
+          },
+          cobon_text_con: controller.cobon!,
+          discount: "${controller.discountCopon}%",
           Price: "${controller.totprice}",
           Shipping: "100",
           totalPrice: "900",
@@ -35,7 +44,7 @@ class Cart extends StatelessWidget {
           return Handlingdataviwe(
               statusReqests: cont.statusReqests,
               widget: ListView(children: [
-                cart_appbar(),
+                // cart_appbar(),
                 SizedBox(
                   height: 40,
                 ),

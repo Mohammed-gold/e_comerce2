@@ -4,7 +4,9 @@ import 'package:e_commerce/core/class/statusReqest.dart';
 import 'package:e_commerce/core/functions/handlingdata.dart';
 import 'package:e_commerce/data/datasorce/network/cartdata.dart';
 import 'package:e_commerce/data/model/appscreenmodel/CartModel.dart';
+import 'package:e_commerce/data/model/appscreenmodel/CoponModel.dart';
 import 'package:e_commerce/data/model/appscreenmodel/itemsmodel.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -14,6 +16,9 @@ class cartcontroller extends GetxController {
   List<CartModel> cartdata_m = [];
   double totprice = 0.0;
   int totcount = 0;
+  CoponModel? coponModel;
+  int discountCopon = 0;
+  TextEditingController? cobon;
   Cartdata cartdata = Cartdata();
 
   Myservicese myservicese = Get.find();
@@ -21,6 +26,7 @@ class cartcontroller extends GetxController {
   void onInit() {
     cartdata_m.clear();
     cart_viwe();
+    cobon = TextEditingController();
     super.onInit();
     // getfav();
   }
@@ -130,5 +136,24 @@ class cartcontroller extends GetxController {
 
     count--;
     update();
+  }
+
+  checkCobon() async {
+    statusReqests = StatusReqests.loading;
+    var response = await cartdata.checkCobon(cobon!.text);
+    statusReqests = Handlingdata(response);
+    if (statusReqests == StatusReqests.success) {
+      if (response['success'] == "true") {
+        List copondata = response['data'];
+        Map<String, dynamic> copondata2 = copondata[0];
+        print(copondata2);
+        coponModel = CoponModel.fromJson(copondata2);
+        discountCopon = coponModel!.coponDiscount!;
+        update();
+      } else {
+        discountCopon = 0;
+        update();
+      }
+    }
   }
 }

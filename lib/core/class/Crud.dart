@@ -21,15 +21,13 @@ class Crud {
         body: data,
       );
 
-      print("==================${response.statusCode}");
-      if (response.statusCode == 200 ||
-          response.statusCode == 201 ||
-          response.statusCode == 500) {
+      print("=============aaaaa=====${response.statusCode}");
+      if (response.statusCode == 200) {
         // print("==============================${response.body}");
         var responsebody = jsonDecode(response.body);
         return right(responsebody);
       } else {
-        // print("${response.statusCode} 000000000000000000000000k");
+        //  print("${response.statusCode} 000000000000000000000000k");
         return left(StatusReqests.serverfailure);
       }
       // } else {

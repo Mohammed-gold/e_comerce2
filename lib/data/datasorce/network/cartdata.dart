@@ -35,4 +35,9 @@ class Cartdata {
     print("=====================$response");
     return response.fold((l) => l, (r) => r);
   }
+
+  checkCobon(String CobonName) async {
+    var response = await crud.postdata(Appurl.cobon, {"cobonN": "$CobonName"});
+    return response.fold((l) => l, (r) => r);
+  }
 }
