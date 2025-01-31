@@ -35,7 +35,7 @@ class Cart extends StatelessWidget {
           discount: "${controller.discountCopon}%",
           Price: "${controller.totprice}",
           Shipping: "100",
-          totalPrice: "900",
+          totalPrice: "${controller.totaldiscount()}",
         );
       }),
       body: Container(

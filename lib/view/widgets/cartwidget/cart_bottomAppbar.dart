@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:e_commerce/controller/cartc_contro.dart';
 import 'package:e_commerce/core/constant/Appcolor.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class cart_bottomAppbar extends StatelessWidget {
   final String Price;
@@ -25,46 +27,59 @@ class cart_bottomAppbar extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(top: 6.0, left: 16, right: 10, bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                  flex: 3,
-                  child: TextFormField(
-                    controller: cobon_text_con,
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                        isDense: true,
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Appcolor.primaryColor),
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Appcolor.primaryColor),
-                            borderRadius: BorderRadius.circular(10))),
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: MaterialButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
+        GetBuilder<cartcontroller>(
+          builder: (controller) => controller.coponName == null
+              ? Padding(
+                  padding: const EdgeInsets.only(
+                      top: 6.0, left: 16, right: 10, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: TextFormField(
+                            controller: cobon_text_con,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 10),
+                                isDense: true,
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Appcolor.primaryColor),
+                                    borderRadius: BorderRadius.circular(10)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Appcolor.primaryColor),
+                                    borderRadius: BorderRadius.circular(10))),
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                color: Appcolor.primaryColor,
+                                onPressed: cobon_onPress,
+                                child: Text(
+                                  "Apply",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ))
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Text(
+                    " Copon ${controller.coponName}",
+                    style: TextStyle(
                         color: Appcolor.primaryColor,
-                        onPressed: cobon_onPress,
-                        child: Text(
-                          "Apply",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )),
-                  ))
-            ],
-          ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
         ),
         Container(
           width: 330,

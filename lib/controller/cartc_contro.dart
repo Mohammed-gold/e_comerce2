@@ -18,6 +18,8 @@ class cartcontroller extends GetxController {
   int totcount = 0;
   CoponModel? coponModel;
   int discountCopon = 0;
+  var totalPrice = 0.0;
+  String? coponName;
   TextEditingController? cobon;
   Cartdata cartdata = Cartdata();
 
@@ -109,15 +111,20 @@ class cartcontroller extends GetxController {
     statusReqests = Handlingdata(response);
     if (StatusReqests.success == statusReqests) {
       if (response['sucsses'] == "true") {
-        List data = response["data"];
+        if (response['tot_co_price'] != false) {
+          List data = response["data"];
 
-        Map total = response["tot_co_price"];
-        totprice = total["totalprice"]!.toDouble();
-        totcount = total["totalcount"]!.toInt();
-        cartdata_m.clear();
-        cartdata_m.addAll(data.map(((e) => CartModel.fromJson(e))));
+          Map total = response["tot_co_price"];
+          totprice = total["totalprice"]!.toDouble();
+          totcount = total["totalcount"]!.toInt();
+          cartdata_m.clear();
+          cartdata_m.addAll(data.map(((e) => CartModel.fromJson(e))));
 
-        update();
+          update();
+        } else {
+          statusReqests = StatusReqests.failure;
+          update();
+        }
       }
     }
 
@@ -149,11 +156,18 @@ class cartcontroller extends GetxController {
         print(copondata2);
         coponModel = CoponModel.fromJson(copondata2);
         discountCopon = coponModel!.coponDiscount!;
+        coponName = coponModel!.coponName;
+
         update();
       } else {
+        coponName = null;
         discountCopon = 0;
         update();
       }
     }
+  }
+
+  totaldiscount() {
+    return totalPrice = totprice - totprice * discountCopon / 100;
   }
 }

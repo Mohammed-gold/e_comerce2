@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 class Appurl {
-  static const Servera = "http://192.168.184.90";
+  static const Servera = "http://192.168.141.90";
   static const Server = "$Servera/ecomerce";
   // static const Server = "https://seashell-frog-671080.hostingersite.com/api";
 
